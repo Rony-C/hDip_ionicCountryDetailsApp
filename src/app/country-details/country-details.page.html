@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>CountryDetails</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">CountryDetails</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-list *ngFor="let c of countries">
+  <img alt="{{ c.name.official }} flag"src="{{ c.flags.png }}">
+  <h2>{{c.name.official}}</h2>
+  <p>
+    <strong>Capital:</strong> {{ c.capital }}
+  </p>
+  <p>
+    <strong>Weather:</strong> {{ weather.description }}
+  </p>
+  <p>
+    <strong>Population:</strong> {{ c.population }}
+  </p>
+  <p>
+    <strong>Languages:</strong>
+      <ion-list *ngFor="let language of getObjectValues(c.languages)">
+        {{ language }}
+      </ion-list>
+    </p>
+      <ion-input [(ngModel)]="inputValue" label="Enter {{ getObjectKeys(c.currencies)[0] }} amount:" placeholder=""></ion-input>
+      <ion-button [disabled]="!inputValue" (click)="convertToEuro()">Convert to EUR</ion-button>
+    <p [hidden]="hidden">{{ inputValue }} {{getObjectKeys(c.currencies)[0]}} = €{{ conversionResult }} EUR</p>
+</ion-list>
+</ion-content>
